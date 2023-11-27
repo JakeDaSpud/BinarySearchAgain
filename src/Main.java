@@ -52,8 +52,10 @@ public class Main {
         Collections.sort(countries, (country1, country2)->{
             return country1.getContinent().compareTo(country2.getContinent()); });
         print(countries);
+
         System.out.println("************** Lambda Expression ***************");
         Collections.sort(countries);
+
         Country key = new Country();
         key.setName("Ireland");
         key.setPopulation(4500000);
@@ -62,5 +64,51 @@ public class Main {
                 key);
         System.out.println(index);
         System.out.println(countries.get(index));
+
+        Country c5 = new Country("O",4500000, 500000, "Mexico City", Continent.SOUTH_AMERICA);
+
+        countries.add(c5);
+
+        //Continent -> Name comparator
+        Collections.sort(countries, (countrye1, countrye2) -> {
+            if (countrye1.getContinent() == countrye2.getContinent())
+            {
+                if (countrye1.getName() == countrye2.getName()) {
+                    return countrye1.getName().compareTo(countrye2.getName());
+                }
+
+                return countrye1.getName().compareTo(countrye2.getName());
+            }
+
+            return countrye1.getContinent().compareTo(countrye2.getContinent());
+        });
+
+        System.out.println("************** Lambda Expression Continent -> Name Comparator ***************");
+        print(countries);
+
+        //DOING CONTAINERS NOW
+        System.out.println("\nDOING CONTAINERS NOW...");
+
+        ArrayList<Container> containers = new ArrayList<Container>();
+        containers.add(new Cylinder("cy01", "Huh", 20, 10));
+        containers.add(new Cuboid("cb01", "Nuffin'", 7, 2, 4));
+        containers.add(new Cylinder("cy02", "Another Cylinder", 50, 10));
+        containers.add(new Cuboid("cb02", "Water'", 7, 8, 5));
+        containers.add(new Cylinder("cy03", "Uisce", 20, 1110));
+        containers.add(new Cuboid("cb03", "Nothing'", 6, 4, 400));
+
+        double totalVolume = 0;
+        for (Container c: containers) {
+            totalVolume += c.volume();
+        }
+        System.out.println("Total Volume: " + totalVolume);
+
+        System.out.println("\nAll Cylinder Dimensions:");
+        for (Container c: containers) {
+            if (c instanceof Cylinder) {
+                c.printDimensions();
+            }
+        }
+
     }
 }
